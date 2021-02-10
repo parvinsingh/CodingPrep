@@ -1,37 +1,55 @@
 package com.parvin.treesAndGraphs;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class BinarySearchTree2 {
 	
 	public static void main(String args[]){
-		int[] input = {1,2,4,6,8,10,11,12,13,15,18,21,23};
-		TreeNode root = createMinimalBST(input);
-		System.out.print("Root node of the BST " + root.val);
-		System.out.println("In Order Format: ");
-		inOrder(root);
-		System.out.println("Post Order Format: ");
-		postOrder(root);
-		System.out.println();
-		System.out.println("max Depth of Tree " + maxDepth(root));
-		System.out.println();
-		TreeNode bottomNode = maxDepthNode(root);
-		if(bottomNode!=null){
-			System.out.println("Bottom most Node of the Tree " + bottomNode.val);
-		}
+//		int[] input = {1,2,4,6,8,10,11,12,13,15,18,21,23};
+//		TreeNode root = createMinimalBST(input);
+//		System.out.println("Root node of the BST " + root.val);
+//		System.out.println("Max Path Sum =" + findMaxSum(root));
+//		System.out.println("In Order Format: ");
+//		inOrder(root);
+//		System.out.println();
+//		System.out.println("Reverse InOrder Format: ");
+//		reverseInOrder(root);
+//		System.out.println();
+		TreeNode rootNode = new TreeNode(10);
+		rootNode.left = new TreeNode(4);
+		rootNode.right = new TreeNode(20);
+		rootNode.left.left = new TreeNode(2);
+		rootNode.right.left = new TreeNode(15);
+		rootNode.right.right = new TreeNode(40);
 		
-		//Instantiating arraylists
-		ArrayList<String> listOfStrings = new ArrayList<String>(
-				Arrays.asList("abc","def","ghi"));
-		
-		//Instantiating arraylists
-		ArrayList<String> listOfStrings2 = new ArrayList<String>(){
-			{
-				add("abc");
-				add("abc");
-			}
-		};	
+		System.out.println("Kth Largest Number: ");
+		//System.out.println(kThLargestNode(root, 3, 0));
+		System.out.println(kthLargest(rootNode, 2));
+//		System.out.println();
+//		System.out.println("Post Order Format: ");
+//		postOrder(root);
+//		System.out.println();
+//		System.out.println("max Depth of Tree " + maxDepth(root));
+//		System.out.println();
+//		TreeNode bottomNode = maxDepthNode(root);
+//		if(bottomNode!=null){
+//			System.out.println("Bottom most Node of the Tree " + bottomNode.val);
+//		}
+//		
+//		//Instantiating arraylists
+//		ArrayList<String> listOfStrings = new ArrayList<String>(
+//				Arrays.asList("abc","def","ghi"));
+//		
+//		//Instantiating arraylists
+//		ArrayList<String> listOfStrings2 = new ArrayList<String>(){
+//			{
+//				add("abc");
+//				add("abc");
+//			}
+//		};	
 		
 		
 	}
@@ -146,6 +164,52 @@ public class BinarySearchTree2 {
 		inOrder(node.left);
 		System.out.print(node.val + " ");
 		inOrder(node.right);
+	}
+	
+	/*
+	 * InOrder Traversal of a BST
+	 * LeftNode , Node , RightNode 
+	 */
+	private static void reverseInOrder(TreeNode node){
+		if(node==null){
+			return;
+		}
+		reverseInOrder(node.right);
+		System.out.print(node.val + " ");
+		reverseInOrder(node.left);
+	}
+	
+	public static int kthLargest(TreeNode root, AtomicInteger i, int k)
+	{
+		// base case
+		if (root == null) {
+			return Integer.MAX_VALUE;
+		}
+
+		// search in right subtree
+		int left = kthLargest(root.right, i, k);
+
+		// if k'th largest is found in left subtree, return it
+		if (left != Integer.MAX_VALUE) {
+			return left;
+		}
+		// if current element is k'th largest, return its value
+		if (i.incrementAndGet() == k) {
+			return root.val;
+		}
+
+		// else search in left subtree
+		return kthLargest(root.left, i, k);
+	}
+
+	// Function to find k'th largest element in BST
+	public static int kthLargest(TreeNode root, int k)
+	{
+		// maintain index to count number of nodes processed so far
+		AtomicInteger i = new AtomicInteger(0);
+
+		// traverse the tree in in-order fashion and return k'th element
+		return kthLargest(root, i, k);
 	}
 	
 	/*
@@ -317,6 +381,41 @@ public class BinarySearchTree2 {
 	//design an algo to print all paths which sum to a given value
 	//the path must go in a straight line down.
 	
+	private static TreeNode commonAncestorNode(TreeNode left, TreeNode right) {
+		HashSet<TreeNode> parentSet = new HashSet<TreeNode>();
+		while(left != null) {
+			parentSet.add(left);
+			left = left.parent;
+		}
+		while(right != null) {
+			if(parentSet.contains(right)) {
+				return right;
+			}
+			right = right.parent;
+		}
+		return null;
+	}
 	
+	private static int findMaxSum(TreeNode node) {
+		return findMaxSum(node, Integer.MIN_VALUE);
+	}
+	
+	private static int findMaxSum(TreeNode node, int result) {
+		if(node == null) {
+			return 0;
+		}
+		
+		int l = findMaxSum(node.left, result);
+		int r = findMaxSum(node.right, result);
+		
+		//check if adding left or right to the node, will make it max or not
+		int tempSum = Math.max((Math.max(l, r) + node.val), node.val);
+		
+		int max_top = Math.max(tempSum, l+r+node.val);
+		
+		result = Math.max(result, max_top);
+		
+		return tempSum;
+	}
 }
 

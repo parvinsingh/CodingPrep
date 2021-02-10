@@ -3,11 +3,9 @@ package com.parvin.StringQuestions;
 public class CreateValidParenthesisString {
 
 	public static void main(String args[]){
-		createValidString(4);
+		createValidString(3);
 		System.out.println("=====");
 		createValidString(6);
-		System.out.println("=====");
-		createValidString(10);
 		System.out.println("=====");
 	}
 	

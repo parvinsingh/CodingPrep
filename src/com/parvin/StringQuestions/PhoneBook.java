@@ -10,7 +10,7 @@ import java.util.HashMap;
  * @author ppanesar
  *
  */
-public class LetterCombinationsOfPhoneNumber {
+public class PhoneBook {
 	
 	public static void main(String args[]){
 		ArrayList<String> result = letterCombinations("23");

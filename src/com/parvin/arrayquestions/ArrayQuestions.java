@@ -1,4 +1,7 @@
 package com.parvin.arrayquestions;
+
+import java.util.HashMap;
+
 /**
  * Given an array A, how would you create an array B where for each i from 0 to n, 
 b[i] = a[0] * a[1] * ... * a[n-1] /a[i] 
@@ -23,8 +26,11 @@ public class ArrayQuestions {
 //		ArrayQuestions.IndexValue value = aq.new IndexValue();
 //		IndexValue maxValue = findMaxDiff(arr, value);
 //		System.out.println(maxValue.maxValue);
-		int[] arr = {1,2,3,5,6,7,8,9,4};
+		int[] arr = {7,1,3,2,4,5,6};
+		System.out.println(minimumSwaps(arr));
 //		mergeSortingAlgo(arr);
+//		int[] subSortInput = {1,2,4,7,10,11,8,12,5,6,16,18,19};
+//		subSortArray(subSortInput);
 	}
 	
 	//Find the intersection of two input arrays
@@ -118,4 +124,62 @@ public class ArrayQuestions {
 		}
 		return maxWord;
 	}
+	
+	public static void subSortArray(int[] input) {
+		int end_left = findLeftPoint(input);
+		if(end_left >= input.length-1) {
+			return; //already sorted
+		}
+		int start_right = findRightPoint(input);
+	}
+	
+	private static int findLeftPoint(int[] array) {
+		for(int i=1; i<array.length; i++) {
+			if(array[i] < array[i-1]) return i-1;
+		}
+		return array.length-1;
+	}
+	
+	private static int findRightPoint(int[] array) {
+		for(int i=array.length-2; i>=0; i--) {
+			if(array[i] > array[i+1]) return i+1;
+		}
+		return 0;
+	}
+	
+	//find the minimum swaps needed to sort the array
+	//time: O(nlogn) space- O(n)
+	//min swaps is when each element is at its right index in array
+	private static int minimumSwaps(int[] arr) {
+        boolean[] visited = new boolean[arr.length+1];
+        
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        
+        for(int i=1; i<visited.length; i++){
+            map.put(i, arr[i-1]);
+        }
+        
+        int swapCount = 0;
+        for(int i=1; i<map.size(); i++){
+            
+            if(!visited[i]){
+                visited[i] = true;
+                
+                if(i == map.get(i)){
+                    continue;
+                }else{
+                    int indexToSwapWith = map.get(i);
+                    
+                    while(!visited[indexToSwapWith]){
+                        visited[indexToSwapWith] = true;
+                        
+                        int nextIndex = map.get(indexToSwapWith);
+                        indexToSwapWith = nextIndex;
+                        swapCount = swapCount + 1;
+                    }
+                }
+            }
+        }
+        return swapCount;
+    }
 }

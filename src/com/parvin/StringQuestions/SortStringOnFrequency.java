@@ -6,7 +6,7 @@ import java.util.Collections;
 public class SortStringOnFrequency {
 
 	public static void main(String args[]){
-		sortBasedOnFrequency("teerrr");
+		sortBasedOnFrequency("tererrer");
 	}
 	
 	public static void sortBasedOnFrequency(String input){

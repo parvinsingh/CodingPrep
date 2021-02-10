@@ -17,10 +17,10 @@ as character 'k' is not present in second string.
 public class StringMatchingWithWildCardChar {
 	
 	public static void main(String args[]){
-		test1();
+		//test1();
 		test2();
-		test3();
-		test4();
+		//test3();
+		//test4();
 	}
 
 	private static void test1() {
@@ -29,7 +29,7 @@ public class StringMatchingWithWildCardChar {
 	}
 	
 	private static void test2() {
-		boolean isMatch = isMatch("g:eks", "geeksforgeeks"); // should be true is returned as false
+		boolean isMatch = isMatch("?ee:ee?s", "geeksforgeeks"); // should be true is returned as false
 		System.out.println(isMatch);
 	}
 	
@@ -42,6 +42,46 @@ public class StringMatchingWithWildCardChar {
 		boolean isMatch = isMatch("ge?ks:", "geeksforgeeks"); // should be true is returned as false
 		System.out.println(isMatch);
 	}
+	
+//	private static boolean isMatch(String wildStr, String normal){
+//		boolean isMatch = false;
+//		
+//		if(wildStr.contains("?") && !wildStr.contains(":")){
+//			if(wildStr.length() != normal.length()) return false;
+//			for(int i=0; i<wildStr.length(); i++){
+//				if(wildStr.charAt(i) == '?' || wildStr.charAt(i) == normal.charAt(i)){
+//					isMatch = true;
+//				}else{
+//					return false;
+//				}
+//			}
+//			return isMatch;
+//		}
+//		
+//		String[] fragments = wildStr.split(":");
+//		String workingStr = normal;
+//		for(String fragment: fragments){
+//			workingStr = workingStr.substring(0, fragment.length());
+//			if(fragment.contains("?")){
+//				for(int i=0; i<fragment.length(); i++){
+//					if(fragment.charAt(i) == '?' || fragment.charAt(i) == workingStr.charAt(i)){
+//						isMatch = true;
+//					}else{
+//						return false;
+//					}
+//				}
+//			}else{
+//				int index = workingStr.indexOf(fragment);
+//				if(index != -1){
+//					isMatch = true;
+//					normal.substring(index+1, normal.length());
+//				}else{
+//					return false;
+//				}
+//			}
+//		}
+//		return isMatch;
+//	}
 	
 	private static boolean isMatch(String wildStr, String normal){
 		boolean isMatch = false;
@@ -59,18 +99,19 @@ public class StringMatchingWithWildCardChar {
 		}
 		
 		String[] fragments = wildStr.split(":");
-		
+		String workingStr = normal;
 		for(String fragment: fragments){
+			workingStr = workingStr.substring(0, fragment.length());
 			if(fragment.contains("?")){
 				for(int i=0; i<fragment.length(); i++){
-					if(fragment.charAt(i) == '?' || fragment.charAt(i) == normal.charAt(i)){
+					if(fragment.charAt(i) == '?' || fragment.charAt(i) == workingStr.charAt(i)){
 						isMatch = true;
 					}else{
 						return false;
 					}
 				}
 			}else{
-				int index = normal.indexOf(fragment);
+				int index = workingStr.indexOf(fragment);
 				if(index != -1){
 					isMatch = true;
 					normal.substring(index+1, normal.length());

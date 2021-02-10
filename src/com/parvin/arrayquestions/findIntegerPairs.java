@@ -32,9 +32,9 @@ public class findIntegerPairs {
     }
 
 	public static void main(String args[]){
-//		int[] arr = {1,3,1,1,6,46,2,46};
-		int[] arr = {1,-1,1,1,1};
-		int count = numberOfPairs2(arr, 2);
+		int[] arr = {1, 3, 7, 3, 5};
+		//int[] arr = {1,-1,1,1,1};
+		int count = numberOfPairs2(arr, 8);
 		System.out.print(count);
 	}
 	
@@ -51,6 +51,7 @@ public class findIntegerPairs {
 			unique.remove(index);
 			if(unique.contains(complement)){
 				count++;
+				
 				unique.remove(unique.indexOf(complement));
 			}
 		}

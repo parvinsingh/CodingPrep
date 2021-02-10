@@ -1,7 +1,5 @@
 package com.parvin.StringQuestions;
 
-import java.util.ArrayList;
-
 /**
  * Find all permutations of a string in a given text.
  * @author ppanesar
@@ -11,38 +9,15 @@ import java.util.ArrayList;
 public class findAllPermsInAText {
 
 	public static void main(String args[]){
-		String text = "aaabccbaabcyxbacmkcba";
+		String text = "baabccbaabcyxbacmkcba";
 		String input = "abc";
 		findAllPerms2(text, input);
 		
 	}
 
-	//will not work if there are duplicates or the text format is something like this- aabcca
-	private static void findAllPerms(String text, String input) {
-		StringBuilder result = new StringBuilder(input.length());
-		StringBuilder strB = new StringBuilder(input);
-		
-		for(char ch: text.toCharArray()){
-			int index = strB.indexOf(String.valueOf(ch)); 
-			if(index != -1){
-				strB.replace(index, index+1, "");
-				result.append(ch);
-				if(result.length() == input.length()){
-					System.out.println(result.toString());
-					strB = new StringBuilder(input);
-					result = new StringBuilder(input.length());
-				}
-			}else{
-				strB = new StringBuilder(input);
-				result = new StringBuilder(input.length());
-			}
-		}
-	}
-	
 	//will work for all kind of inputs
 	private static void findAllPerms2(String text, String input) {
-		int index = 0;
-		for(int i=index; i<text.length(); i++){
+		for(int i=0; i<text.length(); i++){
 			int idx = input.indexOf(text.charAt(i));
 			if(idx!=-1){
 				if(checkPermExists(input, text.substring(i, i+input.length()))){
@@ -50,7 +25,6 @@ public class findAllPermsInAText {
 				}
 			}
 		}
-		
 	}
 	
 	private static boolean checkPermExists(String input, String possibleStr){

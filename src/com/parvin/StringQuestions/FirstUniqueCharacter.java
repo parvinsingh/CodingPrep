@@ -9,7 +9,7 @@ public class FirstUniqueCharacter {
 	public static void main(String args[]){
 //		String input = "ab";
 //		findUniqueCharacter(input);
-		int[] input = {5,3,3,1,6,7,5,4,6,4,9,2};
+		int[] input = {5,3,3,6,7,5,4,6,4,9,2};
 		int uniqueInteger = findUniqueInteger(input);
 		System.out.println(uniqueInteger);
 	}
@@ -65,12 +65,12 @@ public class FirstUniqueCharacter {
 		}
 		int minUnique = Integer.MAX_VALUE;
 		for(int i: input){
-			if(isUniqueMap.get(i) == Boolean.TRUE/* && i<minUnique*/){
+			if(isUniqueMap.get(i) == Boolean.TRUE && i<minUnique){
 				return i;
 			}
 		}
-		//return minUnique;
-		return 0;
+		return minUnique;
+		//return 0;
 	}
 	
 }

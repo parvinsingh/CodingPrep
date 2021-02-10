@@ -7,16 +7,17 @@ public class CombinationsOfString {
 
 	public static void main(String[] args){
 		StringBuilder output = new StringBuilder();
-//		char[] letters = {'g','g','l','o','o','e'};
-		printCombinations("abc", output, 0);
-		System.out.println("-------------------");
+		char[] letters = {'g','g','l','o','o','e'};
+		printCombinations("0123456789", output, 0);
+//		
+//		System.out.println("-------------------");
 		
 //		String maxWord = legalMaxWord(letters, output, 0, 0, "");
 //		System.out.println(maxWord);
-		ArrayList<String> result = permutation("gglooe");
-		for(String str: result){
-			System.out.println(str);
-		}
+//		ArrayList<String> result = permutation("abcdef");
+//		for(String str: result){
+//			System.out.println(str);
+//		}
 		
 	}
 
@@ -34,15 +35,20 @@ public class CombinationsOfString {
 		return result;
 	}
 	
-	private static void printCombinations(String input, StringBuilder output, int index) {
-		for(int i= index; i<input.length(); i++){
-			output.append(input.charAt(i));
+	//Combination of digits
+	private static void printCombinations(String input, StringBuilder output, int index) {//idx=0,1,2,3,4
+		if(output.length()==4) {
 			System.out.println(output);
-			if(i<input.length()) index++;
+			return;
+		}
+		for(int i= index; i<input.length(); i++){//i=3to10
+			output.append(input.charAt(i));//0123
+			if(i<input.length()) {
+				index++;
+			}
 			printCombinations(input, output, index);
 			output.setLength(output.length()-1);
 		}
-//		System.out.println("Out of For loop, and output is =" + output);
 	}
 	
 	private static boolean isLegalWord(String word){
@@ -79,6 +85,4 @@ public class CombinationsOfString {
 	    }
 	    return res;
 	}
-	
-	
 }

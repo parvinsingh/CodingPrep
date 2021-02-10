@@ -14,7 +14,7 @@ public class PermutationOfSmallerStrings {
 
 	public static void main(String args[]){
 		String[] input = {"good","acting","bad","actor","actress"};
-		String bigString = "badactorgoodacting";
+		String bigString = "badactorgoodactingactress";
 		checkPermutation(input, bigString);
 	}
 	

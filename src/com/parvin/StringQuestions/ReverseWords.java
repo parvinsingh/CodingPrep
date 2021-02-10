@@ -13,6 +13,41 @@ import java.util.Scanner;
  */
 public class ReverseWords {
 
+	private static String reverseStringWithTags(String input){
+		if(input==null || input.isEmpty()){
+			return null;
+		}
+		int strLen = input.length();
+		StringBuffer temp = new StringBuffer();
+		StringBuffer output = new StringBuffer();
+		boolean reverse = true;
+		for(int i=0; i<strLen; i++){
+			char ch = input.charAt(i);
+			if(ch=='<'){
+				output.append(reverseWord(temp)).append(input.charAt(i));
+				reverse = false;
+				temp = new StringBuffer();
+				continue;
+			}else if(ch=='>' && !reverse){
+				output.append(temp).append(input.charAt(i));
+				reverse = true;
+				temp = new StringBuffer();
+				continue;
+			}else if(ch == ' ' && reverse) {
+				output.append(reverseWord(temp)).append(input.charAt(i));
+				temp = new StringBuffer();
+				continue;
+			}
+			temp.append(ch);
+		}
+		output.append(reverseWord(temp));
+		return output.toString();
+	}
+	
+	private static String reverseWord(StringBuffer buff) {
+		return buff.reverse().toString();
+	}
+	
 	//reverse the sentence, but keep the individual words as they are
 	private static String reverse(String input){
 		if(input==null || input.isEmpty()){
@@ -36,22 +71,22 @@ public class ReverseWords {
 		return output.toString();
 	}
 	
-//	public static void main(String args[]){
-//		Scanner sc = new Scanner(System.in);
-//		String input = sc.nextLine();
-////		String input = "Man bites Snake";
-//		String output = reverse(input);
-//		System.out.print(output);
-//	}
+	public static void main(String args[]){
+		Scanner sc = new Scanner(System.in);
+	//	String input = sc.nextLine();
+		String input = "parvin<def abc>Man bites Snake<abc>parvin";
+		String output = reverseStringWithTags(input);
+		System.out.print(output);
+	}
 	
-	public static void main(String[] args){
-        Scanner in = new Scanner(System.in);
-        int _n;
-        _n = Integer.parseInt(in.nextLine().trim());
-        
-        StairCase(_n);
-        
-    }
+//	public static void main(String[] args){
+//        Scanner in = new Scanner(System.in);
+//        int _n;
+//        _n = Integer.parseInt(in.nextLine().trim());
+//        
+//        StairCase(_n);
+//        
+//    }
 	 private static void StairCase(int n) {
 	        if(n<1 || n>100){
 	            //system.out.println("Wrong input");

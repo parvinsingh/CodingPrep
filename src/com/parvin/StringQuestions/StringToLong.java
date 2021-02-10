@@ -1,10 +1,17 @@
 package com.parvin.StringQuestions;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class StringToLong {
 
 	public static void main(String args[]){
-		ConvertStringToLong("-345");
-		ConvertIntToString(-534);
+//		ConvertStringToLong("-345");
+//		ConvertIntToString(-534);
+		
+		String integralString = "-91283472332";
+	    System.out.println(myAtoi(integralString));
 	}
 	
 	private static void ConvertStringToLong(String str)
@@ -48,4 +55,47 @@ public class StringToLong {
 			System.out.println("Therefore the string value is : " + result);
 	
 	}
+	
+	private static int myAtoi(String str) {
+	      String input = str.trim();
+	      boolean isNegative = false;
+	      
+	      char firstChar = input.charAt(0);
+	      if(firstChar == '-'){
+	        isNegative = true;
+	        input = input.substring(1);
+	      } else if(firstChar == '+'){
+	        isNegative = false;
+	        input = input.substring(1);
+	      } else if(firstChar < 48 || firstChar > 57){
+	        return 0;
+	      }
+	      
+	      int factor = 1;
+	      int result = 0;
+	      List<Character> resultArr = new ArrayList<Character>();
+	      for(int j=0; j<input.length(); j++){
+	        char c = input.charAt(j);
+	        if(c >= 48 && c <= 57){
+	        	resultArr.add(c);
+	        }else {
+	        	break;
+	        }
+	      }
+	      Collections.reverse(resultArr);
+	      for(char c : resultArr) {
+	    	  result = result + factor*(c-48);
+	    	  factor = factor*10;
+	      }
+	      
+	      result = isNegative ? -1*result : result;
+	      
+	      if (result > Integer.MAX_VALUE) {
+	            return Integer.MAX_VALUE;   
+	        } else if (result < Integer.MIN_VALUE) {
+	            return Integer.MIN_VALUE;
+	        } else {
+	            return result;
+	        }
+	    }
 }

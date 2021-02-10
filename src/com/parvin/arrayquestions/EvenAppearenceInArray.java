@@ -10,7 +10,7 @@ import java.util.LinkedHashMap;
 public class EvenAppearenceInArray {
 
 	public static void main(String args[]){
-		int[] input = {3,2,7,2,7,3,2};
+		int[] input = {3,2,7,7,2,3,3,3};
 		evenAppearence(input);
 	}
 
