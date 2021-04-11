@@ -157,6 +157,23 @@ public class LinkedListNode {
 		return 0;
 	}
 	
+	//removing consecutive elements that sum to zero
+	public static void subList(LinkedListNode node) {
+		//[1,2,3,-3,4]  [1,2,-3,3,1]
+		LinkedListNode curr = node;//1
+		while(curr.getNext()!=null) {//3
+			int sum = curr.data;//3
+			while(sum != 0 && curr.getNext()!=null) {
+				curr = curr.getNext();//1
+				sum += curr.data;//3+1
+			}
+			if(sum == 0) {
+				curr = curr.getNext();//3
+			}
+		}
+		//output current
+	}
+	
 	class PartialSum {
 		LinkedListNode sum = null;
 		int carry = 0;

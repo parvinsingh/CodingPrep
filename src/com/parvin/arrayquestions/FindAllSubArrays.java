@@ -15,9 +15,6 @@ public class FindAllSubArrays {
 		int[] copy = arr;
 		
 		List<int[]> arryList = new ArrayList<int[]>();
-		//int[] tempArr2 = new int[size];
-		//int[] tempArr1 = new int[size];
-		//int temp = 0;
 		for(int i=0; i<size; i++){
 			int[] tempArr = {arr[i]};
 //			tempArr1[i] = arr[i]; 

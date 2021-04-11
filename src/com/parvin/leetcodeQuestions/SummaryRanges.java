@@ -13,7 +13,7 @@ Explanation: 0,1,2 form a continuous range; 4,5 form a continuous range.
 public class SummaryRanges {
 	
 	public static void main(String args[]) {
-		int[] input = {0,2,3,4,6,8,9};
+		int[] input = {0,2,3,4,8,6,9};
 		List<String> output = summaryRanges(input);
 		for(String s: output){
 			System.out.println(s);

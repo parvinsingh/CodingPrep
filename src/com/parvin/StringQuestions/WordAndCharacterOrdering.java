@@ -1,5 +1,6 @@
 package com.parvin.StringQuestions;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -31,15 +32,13 @@ public class WordAndCharacterOrdering {
 	}
 	
 	private static void printOutput(TreeMap<Character, Integer> charMap, WordAndCharacterOrdering order) {
-		LinkedList<Word> words = new LinkedList<Word>();
-		for(Map.Entry<Character, Integer> e: charMap.entrySet()) {
-			words.add(order. new Word(e));
-		}
-		Collections.sort(words, (a,b) -> (a.frequency == b.frequency)
-				? b.ch.compareTo(a.ch) : b.frequency-a.frequency);
+		List<Map.Entry<Character, Integer>> entries = new ArrayList<>(charMap.entrySet());
 		
-		for(Word w: words) {
-			System.out.print(w.ch + "-" + w.frequency + ",");
+		Collections.sort(entries, (a,b) -> a.getValue() == b.getValue()
+											? b.getKey() - a.getKey() : b.getValue()-a.getValue());
+		
+		for(Map.Entry<Character, Integer> e: entries) {
+			System.out.print(e.getKey() + "-" + e.getValue() + ",");
 		}
 		System.out.println();
 	}

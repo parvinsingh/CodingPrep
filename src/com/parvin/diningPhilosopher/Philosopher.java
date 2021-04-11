@@ -12,7 +12,9 @@ public class Philosopher {
 		if(!left.pickUp()) {
 			return false;
 		}
-		
-		
+		right.pickUp();
+		//chew food
+		left.putDown();
+		right.putDown();
 	}
 }

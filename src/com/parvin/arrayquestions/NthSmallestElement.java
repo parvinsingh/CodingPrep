@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
 public class NthSmallestElement {
 
 	public static void main(String args[]) {
-		int[] input = {10,2,5,6,11,3,15};
+		int[] input = {10,2,5,6,11,3,15};//2,3,5,6,10,11,15
 		
 		int result = findNSmallest(input, 3);
 		System.out.println(result);

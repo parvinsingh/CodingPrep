@@ -7,13 +7,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import Utilities.PrintList;
+
 public class Solution {
 
 	public static void main(String args[]) {
 		List<String> repo = new ArrayList<String>(Arrays.asList("code", "codephone", "coddle", "coddles", "codes"));
-		List<List<String>> result = searchSuggestions(repo, "dog");
+		List<List<String>> result = searchSuggestions(repo, "cog");
 		for(List<String> words: result) {
-			System.out.println();
+			if(words.isEmpty()) {
+				continue;
+			}
+			PrintList.print(words);
 		}
 	}
 	

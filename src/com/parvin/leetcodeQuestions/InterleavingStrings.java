@@ -9,6 +9,7 @@ public class InterleavingStrings {
 		System.out.println(checkInterleaved(s1, s2, s3));
 	}
 	
+	//using the prefix approach
 	private static boolean areStringsInterleaved(String s1, String s2, String s3) {
 		if(s3.equals(s1+s2) || s3.equals(s2+s1)) {
 			return true;

@@ -10,12 +10,19 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-public class MergeFiles {
+/*
+ * Given a collection of files. Files have a fileName, date, and content.
+ * At some point, another collection of files are provided, you need to
+ * merge the latest collection with the existing collection.
+ * Return a list of files that need to be deleted, added or updated.
+ * Also note-> files older than 180 days should be deleted.
+ */
+public class MergeExistingCollectionFilesWithNewFiles {
 	
-	private static ArrayList<File> existingFiles = new ArrayList<MergeFiles.File>();
+	private static ArrayList<File> existingFiles = new ArrayList<MergeExistingCollectionFilesWithNewFiles.File>();
 	
 	public static void main(String args[]) {
-		MergeFiles mf = new MergeFiles();
+		MergeExistingCollectionFilesWithNewFiles mf = new MergeExistingCollectionFilesWithNewFiles();
 		
 		File f1 = mf. new File("123", getDate(31), "fdgwffsds");
 		File f2 = mf. new File("234", getDate(15), "ertergf");
@@ -39,8 +46,11 @@ public class MergeFiles {
 		
 		FileObject fo = merge(latestFiles);
 		
+		System.out.print("To Add Files -> ");
 		printList(fo.toAddFiles);
+		System.out.print("To Update Files -> ");
 		printList(fo.toUpdateFiles);
+		System.out.print("To Delete Files -> ");
 		printList(fo.toDeleteFiles);
 	}
 	
@@ -48,21 +58,29 @@ public class MergeFiles {
 		for(File f: files) {
 			System.out.print(f.fileId + ",");
 		}
-		System.out.println("-----------");
+		System.out.println("");
 	}
 	
+	/*
+	 * In this problem it is important to understand the strategy that you would follow
+	 * in doing the operations of add, delete or update. Talk through that, and then
+	 * implement.
+	 */
 	public static FileObject merge(List<File> latestFiles) {
-		MergeFiles mf = new MergeFiles();
+		MergeExistingCollectionFilesWithNewFiles mf = new MergeExistingCollectionFilesWithNewFiles();
 		
 		FileObject fo = mf.new FileObject();
 		/*
-		 * Update all files that can be updated, and add that are not present
-		 * DeleteFiles older than 180
+		 * Update all files that can be updated, and add that are not present.
+		 * During the add operation, if you meet storage constraint, then just remove the
+		 * oldest file, and replace it with the new file from the LatestFile list.
+		 * 
+		 * After that deleteFiles older than 180 from the existing list. 
 		 * if there are still files to add, delete more files and then add
 		 */
-		List<File> newLatest = updateAndAddFiles(latestFiles, fo); // updated and add
+		List<File> newLatest = updateAndAddFiles(latestFiles, fo);
 		
-		deleteFiles(newLatest, fo);//deleted old files
+		deleteFiles(fo);//deleted old files
 		
 		if(!newLatest.isEmpty()) {
 			newLatest = addFiles(newLatest, fo);
@@ -80,10 +98,10 @@ public class MergeFiles {
 		}
 		
 		for(File f : latest) {
-			boolean isAdd = sortedSet.add(f.fileId);
+			boolean isAdd = sortedSet.add(f.fileId);//add method in a set returns false, if the elemenet already exists.
 			if(!isAdd) {
 				fo.toUpdateFiles.add(f);
-				existingFiles.remove(f);
+				existingFiles.remove(f);//dont need this.
 			}else {
 				fo.toAddFiles.add(f);
 			}
@@ -92,7 +110,7 @@ public class MergeFiles {
 		return tempLatest;
 	}
 
-	private static void deleteFiles(List<File> latest, FileObject fo) {
+	private static void deleteFiles(FileObject fo) {
 		List<File> temp = new ArrayList<File>();
 		
 		for(File f : existingFiles) {
@@ -164,9 +182,9 @@ public class MergeFiles {
 	
 	//This class can be made public depending on how it will end up being used.
 	class FileObject {
-		private List<File> toAddFiles = new ArrayList<MergeFiles.File>();
-		private List<File> toDeleteFiles = new ArrayList<MergeFiles.File>();
-		private List<File> toUpdateFiles = new ArrayList<MergeFiles.File>();
+		private List<File> toAddFiles = new ArrayList<MergeExistingCollectionFilesWithNewFiles.File>();
+		private List<File> toDeleteFiles = new ArrayList<MergeExistingCollectionFilesWithNewFiles.File>();
+		private List<File> toUpdateFiles = new ArrayList<MergeExistingCollectionFilesWithNewFiles.File>();
 		
 		public List<File> addFiles(){
 			return toAddFiles;

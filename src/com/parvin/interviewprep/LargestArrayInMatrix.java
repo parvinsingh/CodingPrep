@@ -1,15 +1,19 @@
 package com.parvin.interviewprep;
 
+/*
+ * Find the largest array of 1s in the given 2-d matrix
+ */
+
 public class LargestArrayInMatrix {
 	
 	public static void main(String args[]) {
 		int[][] input = {
-				{1,0,0,1,0,0},
-				{0,0,1,1,0,0},
-				{1,1,1,1,1,0},
-				{0,1,1,1,1,1},
-				{0,1,1,1,1,1},
-				{1,1,1,1,1,1}
+				{1,0,0,1,0,0},//1,0,0,1,0,0
+				{0,0,1,1,0,0},//0,0,1,1,0,0
+				{1,1,1,1,1,0},//1,1,1,2,1,0
+				{0,1,1,1,1,1},//0,1,2,2,2,1
+				{0,1,1,1,1,1},//0,1,2,3,3,2
+				{1,1,1,1,1,1} //1,1,2,3,4,3
 		};
 		Cell result = LargestArray(input);
 		System.out.println("Size of largest square = " + result.size);

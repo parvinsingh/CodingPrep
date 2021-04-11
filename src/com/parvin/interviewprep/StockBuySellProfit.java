@@ -11,7 +11,7 @@ public class StockBuySellProfit {
 		int nums3[] = {6,0,-1,10};
 		int nums4[] = {10,3,3,5,0,0,3,1,4};
 		int nums5[] = {3,3,5,0,0,3,1,4};
-		System.out.println(maxProfit2(nums3));
+		System.out.println(maxProfit(nums2));
 	}
 
 	//Only one transaction is allowed

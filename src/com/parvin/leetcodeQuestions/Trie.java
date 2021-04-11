@@ -28,6 +28,7 @@ public class Trie {
         for(int i=0; i<word.length(); i++){
             char c = word.charAt(i);
             int index = c-'a';
+            TrieNode par = p;
             if(p.arr[index]==null){
                 TrieNode temp = new TrieNode();
                 p.arr[index]=temp;//create a node and assign it inside array
@@ -35,6 +36,7 @@ public class Trie {
             }else{
                 p=p.arr[index];
             }
+            p.parent = par;
         }
         p.isEnd=true;
     }
@@ -85,10 +87,12 @@ public class Trie {
 
 class TrieNode {
     TrieNode[] arr;
+    TrieNode parent;
     boolean isEnd;
     // Initialize your data structure here.
     public TrieNode() {
         this.arr = new TrieNode[26];
+        parent = null;
     }
  
 }

@@ -16,7 +16,7 @@ public class ArrayLeftRotation {
 			System.out.print(i + ",");
 		}
 	}
-
+	
 	private static int[] rotateleft2(int[] arr, int steps) {
 		int[] result = new int[arr.length];
 		int idx = 0;

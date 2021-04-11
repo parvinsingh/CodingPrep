@@ -1,13 +1,12 @@
 package com.parvin.arrayquestions;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 /**
- * Given an array A, how would you create an array B where for each i from 0 to n, 
-b[i] = a[0] * a[1] * ... * a[n-1] /a[i] 
-You should do this in O(n) time without using division. 
-
-As an example, if A = {1,2,3,4}, B should be (24,12,8,6).
+ * Random array questions
  * @author ppanesar
  *
  */
@@ -26,15 +25,83 @@ public class ArrayQuestions {
 //		ArrayQuestions.IndexValue value = aq.new IndexValue();
 //		IndexValue maxValue = findMaxDiff(arr, value);
 //		System.out.println(maxValue.maxValue);
-		int[] arr = {7,1,3,2,4,5,6};
-		System.out.println(minimumSwaps(arr));
-//		mergeSortingAlgo(arr);
-//		int[] subSortInput = {1,2,4,7,10,11,8,12,5,6,16,18,19};
-//		subSortArray(subSortInput);
+		testMinSwapsUsingCyclicSort();
+		testMinSwapsUsingBFS();
+		testFindMaxDiffBetweenSuccessiveElements();
+		testFindLargestDiff();
+		testLargestSequence();
 	}
 	
-	//Find the intersection of two input arrays
+	private static void testMinSwapsUsingCyclicSort() {
+		int[] arr = {1,5,4,3,2};
+		System.out.println(minimumSwapsCyclicSort(arr));
+		System.out.println("=====");
+	}
 	
+	private static void testMinSwapsUsingBFS() {
+		int[] arr = {1,5,4,3,2};
+		System.out.println(minimumSwaps(arr));
+		System.out.println("=====");
+	}
+	
+	private static void testFindLongestWord() {
+		//findLongestWord
+	}
+	
+	private static void testLargestSequence() {
+		
+	}
+	
+	private static void testFindMaxDiffBetweenSuccessiveElements() {
+		int[] arr = {2, 5, 1, 7, 3, 9};
+		System.out.println(findMaxDiffBetweenSuccessiveElements(arr));
+		System.out.println("=====");
+	}
+	
+	private static void testFindLargestDiff() {
+		int n=6;
+		List<Integer> list = new ArrayList<Integer>(); 
+		list.add(2); 
+        list.add(4);
+        list.add(5);
+        list.add(6);
+        System.out.println(findLargestDiff(6, list));
+	}
+	
+	//find largest difference after removing integers in the list
+	//given an integer array with some ints removed, find the largest difference
+	//between consecutive numbers.
+	//n- > number of integers, starting from 1.
+	//e.g: n=6, arr=[2,4] -> means that number 2 and 4 are removed 
+	//this is a part of PrisonBreak problem
+	public static int findLargestDiff(int n, List<Integer> arr) {
+		int diff = 1;
+		int maxDiff = 1;
+		for(int i=1; i<=n-1; i++) {
+			if(arr.contains(i) && arr.contains(i+1)) {
+				diff++;
+			}else {
+				diff = 1;
+			}
+			maxDiff = Math.max(diff, maxDiff);
+		}
+		return maxDiff+1;
+	}
+	
+	
+	private static int findMaxDiffBetweenSuccessiveElements(int[] inputArr){
+		Arrays.sort(inputArr);
+		int input = inputArr[0];
+		int maxDiff = 0;
+		for(int i=1; i<inputArr.length; i++){
+			if(inputArr[i]>input){
+				int currDiff = inputArr[i]-input;
+				maxDiff = Math.max(maxDiff, currDiff);
+			}
+			input=inputArr[i];
+		}
+		return maxDiff;
+	}
 	
 	//find the max difference in a given array of integers,
 	//the larger number always appears after the smaller number
@@ -182,4 +249,20 @@ public class ArrayQuestions {
         }
         return swapCount;
     }
+	
+	//O(n) time and O(1) space.
+	//while loop runs in the worst case for O(n-1) times and for loop O(n)
+	//note there is no i increment inside while loop
+	private static int minimumSwapsCyclicSort(int[] a) {
+		int count = 0;
+		for(int i=0; i<a.length; i++){//i=0,1,2,3
+	      while(i+1!=a[i]){
+	        int temp = a[a[i] - 1];//temp = a[5] = 2
+	        a[a[i] - 1] = a[i];//a[5] = a[1] = 6
+	        a[i] = temp;//a[1] = 2
+	        count++;
+	      }
+	    } 
+		return count;
+	}
 }

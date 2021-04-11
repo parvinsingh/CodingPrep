@@ -16,7 +16,7 @@ public class SalesForceTest {
 		System.out.println(result);
 		
 	}
-	
+	//remove the max from front or end, given the window size k.
 	public static long teamFormation(List<Integer> score, int team_size, int k) {
 	    
 		int i=0;
@@ -34,7 +34,7 @@ public class SalesForceTest {
             }
             return sum;
         }
-		
+		int backIdx = 0;
 		while(t < team_size) {
 			//loop from front
 			for(i=0; i<k; i++) {
@@ -43,15 +43,20 @@ public class SalesForceTest {
 			
 			//loop from back
 			for(j=score.size()-1; j>=score.size()-k; j--) {
-				back_max = Math.max(back_max, score.get(j));
+				if(back_max <= score.get(j)) {
+					back_max = score.get(j);
+					backIdx = j;
+					continue;
+				}
+				//back_max = Math.max(back_max, score.get(j));
 			}
 			
 			if(front_max > back_max) {
 				int idx = score.indexOf(front_max);
 				team[t] = score.remove(idx);
 			}else if(front_max < back_max) {
-				int idx = score.lastIndexOf(back_max);
-				team[t] = score.remove(idx);
+				//int idx = score.lastIndexOf(back_max);
+				team[t] = score.remove(backIdx);
 			}else {
 				int idx = score.indexOf(front_max);
 				team[t] = score.remove(idx);

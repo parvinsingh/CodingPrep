@@ -1,5 +1,8 @@
 package com.parvin.LinkedLists;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LinkedList {
 	static Node head1, head2; 
 	  
@@ -14,26 +17,50 @@ public class LinkedList {
         } 
     } 
   
-//    Node addTwoLists(Node first, Node second, int carry, Node result) {
-//    	if(first == null && second == null){
-//            if(carry > 0){
-//                result.next = new LinkedListNode(carry);
-//            }
-//            return result;
-//        }
-//        int d1 = first == null ? 0 : first.data;
-//        int d2 = second == null ? 0 : second.data;
-//        int s = d1 + d2 + carry;
-//        Node sum = new Node(s%10);
-//        if(result == null){
-//            result = sum;
-//        }else{
-//            result.next = sum;
-//        }
-//        return addTwoNumbers(l1.next, l2.next, s/10, result);
-//    	return result;
-//    	
-//    }
+    //Given a list in form of linked list, cancel out all the resources 
+    //whose sum up to 0(Zero) and return the remaining list.
+    //6 -6 3 2 -5 4 returns 4
+    //8 10 4 -1 -3 return 8 10
+    //8 10 1 4 3 -1 -3  return either 8 10 4 or 8 10 1 3
+    static Node printSubList(Node top) {
+    	Node start = top;
+    	
+    	while(start != null) {
+    		Node end = start.next;
+    		int sum = 0;
+    		
+    		while(end != null) {
+    			sum += end.data;
+    			if(sum == 0) {
+    				start.next = end.next;
+    			}
+    			end = end.next;
+    		}
+    		start = start.next;
+//    		if(start!=null) {
+//    			end = start.next;
+//    		}
+    	}
+    	return start;
+    }
+    
+    public static void main(String[] args) { 
+        LinkedList list = new LinkedList(); 
+  
+        // creating first list 
+        list.head1 = new Node(1); 
+        list.head1.next = new Node(2); 
+        list.head1.next.next = new Node(3); 
+        list.head1.next.next.next = new Node(-3); 
+        list.head1.next.next.next.next = new Node(-2);
+//        list.head1.next.next.next.next.next = new Node(1);
+        System.out.print("First List is "); 
+        list.printList(head1); 
+  
+        printSubList(head1);
+        System.out.print("After removing elements which sum to zero "); 
+        list.printList(head1); 
+    } 
     
     /* Adds contents of two linked lists and return the head node of resultant list */
     Node addTwoLists(Node first, Node second) { 
@@ -99,29 +126,29 @@ public class LinkedList {
         System.out.println(""); 
     } 
   
-    public static void main(String[] args) { 
-        LinkedList list = new LinkedList(); 
-  
-        // creating first list 
-        list.head1 = new Node(7); 
-        list.head1.next = new Node(5); 
-        list.head1.next.next = new Node(9); 
-        list.head1.next.next.next = new Node(4); 
-        list.head1.next.next.next.next = new Node(6); 
-        System.out.print("First List is "); 
-        list.printList(head1); 
-  
-        // creating seconnd list 
-        list.head2 = new Node(8); 
-        list.head2.next = new Node(4); 
-        System.out.print("Second List is "); 
-        list.printList(head2); 
-  
-        // add the two lists and see the result 
-        Node rs = list.addTwoLists(head1, head2); 
-        //Node rs = list.addTwoLists(head1, head2, 0, null);
-        System.out.print("Resultant List is "); 
-        list.printList(rs); 
-    } 
+//    public static void main(String[] args) { 
+//        LinkedList list = new LinkedList(); 
+//  
+//        // creating first list 
+//        list.head1 = new Node(7); 
+//        list.head1.next = new Node(5); 
+//        list.head1.next.next = new Node(9); 
+//        list.head1.next.next.next = new Node(4); 
+//        list.head1.next.next.next.next = new Node(6); 
+//        System.out.print("First List is "); 
+//        list.printList(head1); 
+//  
+//        // creating seconnd list 
+//        list.head2 = new Node(8); 
+//        list.head2.next = new Node(4); 
+//        System.out.print("Second List is "); 
+//        list.printList(head2); 
+//  
+//        // add the two lists and see the result 
+//        Node rs = list.addTwoLists(head1, head2); 
+//        //Node rs = list.addTwoLists(head1, head2, 0, null);
+//        System.out.print("Resultant List is "); 
+//        list.printList(rs); 
+//    } 
 
 }

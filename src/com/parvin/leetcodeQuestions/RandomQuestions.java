@@ -5,8 +5,6 @@ import java.util.*;
 
 public class RandomQuestions {
 	  public static void main(String[] argv) {
-//	    System.out.println("Hello, world!");
-//	    System.out.println("This is a fully functioning Java environment.");
 //	    int[] hArray = {1,8,6,2,5,4,8,3,7};
 //	    int area = maxArea(hArray);
 //	    System.out.println(area);

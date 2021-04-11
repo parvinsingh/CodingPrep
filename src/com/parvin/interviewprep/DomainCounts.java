@@ -2,6 +2,10 @@ package com.parvin.interviewprep;
 
 import java.util.HashMap;
 
+/*
+ * Given a string array of count of domains, return total count of each
+ * subdomain.
+ */
 public class DomainCounts {
 
 	public static void main(String[] args) {

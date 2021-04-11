@@ -1,7 +1,9 @@
 package com.parvin.arrayquestions;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 
@@ -30,12 +32,34 @@ public class findIntegerPairs {
 		}
 		return count;
     }
+	
+	static List<String> numberOfPairsUsingMap(int[] a, int sum) {
+		Set<String> set = new HashSet<>();
+		List<String> output = new ArrayList<String>();
+		
+		for(int i: a){
+			int complement = sum-i;
+			if(!set.add(i+"-"+complement)) {
+				output.add(i+"-"+complement);
+				continue;//1-7, 3-5, 
+			}else if(!set.add(complement+"-"+i)){
+				output.add(i+"-"+complement);
+				continue;
+			}
+		}
+		return output;
+    }
 
 	public static void main(String args[]){
-		int[] arr = {1, 3, 7, 3, 5};
+		int[] arr = {2, 3, 7, 3, 5, 0, 8};
 		//int[] arr = {1,-1,1,1,1};
 		int count = numberOfPairs2(arr, 8);
-		System.out.print(count);
+		List<String> op = numberOfPairsUsingMap(arr, 8);
+		System.out.println(count);
+		
+		for(String s: op) {
+			System.out.println(s);
+		}
 	}
 	
 	public static int numberOfPairs2(int[] arr, int sum){
@@ -48,7 +72,7 @@ public class findIntegerPairs {
 		while(!unique.isEmpty()){
 			int index = 0;
 			int complement = sum-unique.get(index);
-			unique.remove(index);
+			unique.remove(index);//operation takes O(n) time
 			if(unique.contains(complement)){
 				count++;
 				

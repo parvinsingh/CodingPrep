@@ -1,7 +1,5 @@
 package com.parvin.arrayquestions;
 
-import java.util.Stack;
-
 /**
  * Check loop in array according to given constraints
 Given an array arr[0..n-1] of positive and negative numbers we need to find if there is a 
@@ -16,7 +14,7 @@ public class CircularArrayLoop {
 
 	public static void main(String args[]){
 		//int[] input = {1,2};
-		int[] input = {2, -1, 1, 2, 2};
+		int[] input = {2, -1, 1, 2, 2};//{2, -1, 0, 2, 2};
 		boolean isLooped = circularArrayLoop(input);
 		System.out.print(isLooped);
 	}
@@ -27,12 +25,13 @@ public class CircularArrayLoop {
         
         int loopStartIndex = 0;
         int index = 0;
-        int start = nums[0];
         do{
         	if(nums[index] > 0){
             	index = moveForward(index, nums[index], size);
-            }else {
+            }else if(nums[index] < 0){
             	index = moveBackward(index, Math.abs(nums[index]), size);
+            }else {
+            	return false; //0 at an index means no loop
             }
         	if(loopStartIndex == index) return true;
         }while (loopStartIndex != index);

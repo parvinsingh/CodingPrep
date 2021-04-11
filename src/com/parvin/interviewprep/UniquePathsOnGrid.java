@@ -76,11 +76,11 @@ public class UniquePathsOnGrid {
 			
 			return Math.min(r1, r2);
 		}
-		if(r<grid.length-1) {//top row
+		if(r<grid.length-1) {//left most column
 			return grid[r][c] + minPathSum(r+1, c, grid);
 		}
 		
-		if(c<grid[0].length-1) {//left most column
+		if(c<grid[0].length-1) {//top row
 			return grid[r][c] + minPathSum(r, c+1, grid);
 		}
 		return 0;

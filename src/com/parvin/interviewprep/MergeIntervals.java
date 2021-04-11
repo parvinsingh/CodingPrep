@@ -3,14 +3,6 @@ package com.parvin.interviewprep;
 import java.util.Arrays;
 import java.util.Comparator;
 
-/**
- * https://leetcode.com/problems/merge-intervals/
- * @author papanesa
- * Input: [[1,3],[2,6],[8,10],[15,18]]
-Output: [[1,6],[8,10],[15,18]]
-Explanation: Since intervals [1,3] and [2,6] overlaps, merge them into [1,6].
- *
- */
 public class MergeIntervals {
 	
 	public static void main(String[] args) {
@@ -23,12 +15,13 @@ public class MergeIntervals {
 	        
 	    }
 	   }
-	   
-//given the start time, and end times, and meeting schedules. find out 
-	//all meeting schedules for the duration
+	
+	// schedules[][] -> represents the busy calendar times.
+	// given duration of the meeting, and start and end times, you need to
+	// find out all the slots where the meeting can be booked.
 	public static int[][] meetingTimes(int[][] schedules, int start, int end, int duration){
 	    
-	    //soreted array on start times
+	    //sorted array on start times
 	    Arrays.sort(schedules, new Comparator<int[]>() {
 	        @Override
 	        public int compare(int[] a, int[] b){
@@ -71,49 +64,57 @@ public class MergeIntervals {
 //		}
 //	}
 //	
-//	private static int[][] merge(int[][] input) {
-//		if(input.length <= 0) {
-//			return new int[0][];
-//		}
-//		
-//		//sort the input based on the first index of the interval
-//		Arrays.sort(input, new Comparator<int[]>() {
-//			@Override
-//			public int compare(int[] o1, int[] o2) {
-//				return o1[0]-o2[0];
-//			}
-//			
-//		});
-//		
-//		int len = input.length;
-//		
-//		int[][] output = new int[len][];
-//		int op = 0;
-//		int index = 1;
-//		int[] temp = input[0];
-//		while(index < len) {
-//			if(merge(temp, input[index])) {
-//				int b[] = input[index];
-//				temp[0] = temp[0] >= b[0] ? b[0] : temp[0];
-//				temp[1] = temp[1] <= b[1] ? b[1] : temp[1];
-//			}else {
-//				output[op] = temp;
-//				op++;
-//				temp = input[index];
-//			}
-//			index++;
-//		}
-//		output[op] = temp;
-//		
-//		//filtering takes care of removing the nulls
-//		return Arrays.stream(output).filter(s -> (s != null)).toArray(int[][] :: new);
-//	}
-//	
-//	private static boolean merge(int[] a, int[] b) {
-//		if((a[0] <= b[0]) && (b[0] <= a[1])
-//				||((b[0] <= a[0]) && (a[0] <= b[1]))) {
-//			return true;
-//		}
-//		return false;
-//	}
+	/*
+	 * https://leetcode.com/problems/merge-intervals/
+	 * @author papanesa
+	 * Input: [[1,3],[2,6],[8,10],[15,18]]
+	 * Output: [[1,6],[8,10],[15,18]]
+	 * Explanation: Since intervals [1,3] and [2,6] overlaps, merge them into [1,6].
+	 *
+	 */
+	private static int[][] merge(int[][] input) {
+		if(input.length <= 0) {
+			return new int[0][];
+		}
+		
+		//sort the input based on the first index of the interval
+		Arrays.sort(input, new Comparator<int[]>() {
+			@Override
+			public int compare(int[] o1, int[] o2) {
+				return o1[0]-o2[0];
+			}
+			
+		});
+		
+		int len = input.length;
+		
+		int[][] output = new int[len][];
+		int op = 0;
+		int index = 1;
+		int[] temp = input[0];
+		while(index < len) {
+			if(merge(temp, input[index])) {
+				int b[] = input[index];
+				temp[0] = temp[0] >= b[0] ? b[0] : temp[0];
+				temp[1] = temp[1] <= b[1] ? b[1] : temp[1];
+			}else {
+				output[op] = temp;
+				op++;
+				temp = input[index];
+			}
+			index++;
+		}
+		output[op] = temp;
+		
+		//filtering takes care of removing the nulls
+		return Arrays.stream(output).filter(s -> (s != null)).toArray(int[][] :: new);
+	}
+	
+	private static boolean merge(int[] a, int[] b) {
+		if((a[0] <= b[0]) && (b[0] <= a[1])
+				||((b[0] <= a[0]) && (a[0] <= b[1]))) {
+			return true;
+		}
+		return false;
+	}
 }

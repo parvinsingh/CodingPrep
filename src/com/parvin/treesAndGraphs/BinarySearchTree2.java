@@ -27,7 +27,7 @@ public class BinarySearchTree2 {
 		
 		System.out.println("Kth Largest Number: ");
 		//System.out.println(kThLargestNode(root, 3, 0));
-		System.out.println(kthLargest(rootNode, 2));
+		System.out.println(kthLargest(rootNode, 3));
 //		System.out.println();
 //		System.out.println("Post Order Format: ");
 //		postOrder(root);

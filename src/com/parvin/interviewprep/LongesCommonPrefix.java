@@ -8,11 +8,15 @@ package com.parvin.interviewprep;
 public class LongesCommonPrefix {
 
 	public static void main(String[] args) {
-		//String[] input = {"flower","flow","flight"};
-		//String[] input = {"dog","racecar","car"};
-		String[] input = {"", ""};
-		String result = getLongestCommonPrefix(input);
-		System.out.println(result);
+		String[] input1 = {"flower","flow","flight"};
+		String[] input2 = {"dog","racecar","car"};
+		String[] input3 = {"", ""};
+		String result1 = getLongestCommonPrefix(input1);
+		System.out.println(result1);
+		String result2 = getLongestCommonPrefix(input2);
+		System.out.println(result2);
+		String result3 = getLongestCommonPrefix(input3);
+		System.out.println(result3);
 	}
 
 	private static String getLongestCommonPrefix(String[] input) {
@@ -44,6 +48,7 @@ public class LongesCommonPrefix {
 		
 		return (prefix.isBlank()) ? "" : prefix;
 	}
+	//TimeComplexity-> O(NL) -> where N: input size, and L: smallest string size
 
 	private static String getCommonPrefix(String original, String prefix) {
 		if(original.charAt(0) != prefix.charAt(0) || original.isBlank() || prefix.isBlank()) {
