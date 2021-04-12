@@ -1,7 +1,5 @@
 package com.parvin.leetcodeQuestions;
 
-//https://www.programcreek.com/2014/05/leetcode-implement-trie-prefix-tree-java/
-
 public class Trie {
 	
 	public static void main(String args[]) {
