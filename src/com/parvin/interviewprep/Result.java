@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.*;
 
-//import org.json.JSONObject;
+import org.json.JSONObject;
 import org.json.simple.*; //library used in Hackerrank
 
 
@@ -77,7 +77,7 @@ public class Result {
         		int pageNum = Integer.parseInt(currPageNum);
         		System.out.println(String.format("currPage = %d, and pageNum = %d", currPage, pageNum));
         		    
-                totalGoals = totalGoals + FindTotalGoals(matchData, team, total);
+              totalGoals = totalGoals + FindTotalGoals(matchData, team, total);
                 currPage++;
                 
             }while(currPage <= totalPages);

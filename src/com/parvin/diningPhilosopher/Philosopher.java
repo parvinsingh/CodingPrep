@@ -16,5 +16,6 @@ public class Philosopher {
 		//chew food
 		left.putDown();
 		right.putDown();
+		return false;
 	}
 }

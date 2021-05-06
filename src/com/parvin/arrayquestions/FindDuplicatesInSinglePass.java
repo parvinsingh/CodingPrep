@@ -57,7 +57,7 @@ public class FindDuplicatesInSinglePass {
     public static void main(String[] args)
     {
         int[] arr = { 1,2,3,4,6,7,8,9,10,12 };
-        getMissingNo(arr, arr.length);
+        getMissingNo(arr);
     }
 	
 }
